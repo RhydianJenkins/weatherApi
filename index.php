@@ -26,14 +26,25 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="page-header">
-                        <h1>Weather API</h1>
-                        <select class="selectpicker show-menu-arrow" data-live-search="true">
-                            <?php foreach ($availableAreas as $name => $number) : ?>
-                                <option><?= $name ?></option>
-                            <?php endforeach ; ?>
-                        </select>
-                    </div>
+                    <h1 class="page-header">Weather API</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" style="padding-bottom: 20px;">
+                <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
+                    <select class="selectpicker show-menu-arrow" data-live-search="true">
+                        <?php foreach ($availableAreas as $name => $number) : ?>
+                            <option><?= $name; ?></option>
+                        <?php endforeach ; ?>
+                    </select>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                    <img id="weatherImg" src="" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
                     <h4>Today:</h4>
                     <p id="item0"></p>
                     <br />
@@ -66,8 +77,6 @@
 
     <!-- Send ajax to custom weather api -->
     <script>
-        // on page load, populate the thingies
-        // on select, populate the thingies
         $(document).ready(function(){
             $('.selectpicker').change(function(e){
                 e.preventDefault();
@@ -84,6 +93,7 @@
                     success: function(response) {
                         var responseObj = $.parseJSON(response);
                         var item0 = responseObj.channel.item[0].description;
+                        var weatherImgUrl = responseObj.channel.image.url;
                         var item1 = responseObj.channel.item[1].description;
                         var item2 = responseObj.channel.item[2].description;
                         var prettyResponse = JSON.stringify(responseObj, null, 4);
@@ -91,6 +101,7 @@
                         $('#item1').html(item1);
                         $('#item2').html(item2);
                         $('#rawResponse').html(prettyResponse);
+                        $('#weatherImg').attr('src', weatherImgUrl);
                     }
                 });
             }
