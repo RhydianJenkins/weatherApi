@@ -1,6 +1,6 @@
 <?php
     spl_autoload_register(function ($class) {
-        $baseDir = __DIR__ . '/res/classes/';
+        $baseDir = './res/classes/';
         $file = $baseDir . $class . '.php';
         if (file_exists($file)) { require $file; }
     });
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="container">
-            <div class="row" style="padding-bottom: 20px;">
+            <div class="row">
                 <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
                     <select class="selectpicker show-menu-arrow" data-live-search="true">
                         <?php foreach ($availableAreas as $name => $number) : ?>
@@ -45,6 +45,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
+                    <h1 class="page-header">Forecast</h1>
                     <a id="item0link" target="_blank" href="" style="text-decoration: none;">
                         <h4>Today:</h4>
                         <p id="item0"></p>
@@ -91,14 +92,13 @@
             var updateWeather = function(){
                 $.ajax({
                     method: 'post',
-                    url: '/ror/weatherApi/res/classes/Weather.php',
+                    url: './res/classes/Weather.php',
                     data: {
                         'area': $(".selectpicker").val(),
                         'ajax': true
                     },
                     success: function(response) {
                         var responseObj = $.parseJSON(response);
-                        var weatherImgUrl = responseObj.channel.image.url;
                         var item0 = responseObj.channel.item[0].description;
                         var item0link = responseObj.channel.item[0].link;
                         var item1 = responseObj.channel.item[1].description;
@@ -106,6 +106,7 @@
                         var item2 = responseObj.channel.item[2].description;
                         var item2link = responseObj.channel.item[2].link;
                         var prettyResponse = JSON.stringify(responseObj, null, 4);
+                        var weatherImgUrl = responseObj.channel.image.url;
                         $('#item0').html(item0);
                         $('#item0link').attr('href', item0link);
                         $('#item1').html(item1);
