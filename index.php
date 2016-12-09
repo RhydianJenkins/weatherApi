@@ -45,14 +45,20 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h4>Today:</h4>
-                    <p id="item0"></p>
+                    <a id="item0link" target="_blank" href="" style="text-decoration: none;">
+                        <h4>Today:</h4>
+                        <p id="item0"></p>
+                    </a>
                     <br />
-                    <h4>Tomorrow:</h4>
-                    <p id="item1"></p>
+                    <a id="item1link" target="_blank" href="" style="text-decoration: none;">
+                        <h4>Tomorrow:</h4>
+                        <p id="item1"></p>
+                    </a>
                     <br />
-                    <h4>Day After:</h4>
-                    <p id="item2"></p>
+                    <a id="item2link" target="_blank" href="" style="text-decoration: none;">
+                        <h4>Day After:</h4>
+                        <p id="item2"></p>
+                    </a>
                 </div>
             </div>
         </div>
@@ -92,14 +98,20 @@
                     },
                     success: function(response) {
                         var responseObj = $.parseJSON(response);
-                        var item0 = responseObj.channel.item[0].description;
                         var weatherImgUrl = responseObj.channel.image.url;
+                        var item0 = responseObj.channel.item[0].description;
+                        var item0link = responseObj.channel.item[0].link;
                         var item1 = responseObj.channel.item[1].description;
+                        var item1link = responseObj.channel.item[1].link;
                         var item2 = responseObj.channel.item[2].description;
+                        var item2link = responseObj.channel.item[2].link;
                         var prettyResponse = JSON.stringify(responseObj, null, 4);
                         $('#item0').html(item0);
+                        $('#item0link').attr('href', item0link);
                         $('#item1').html(item1);
+                        $('#item1link').attr('href', item1link);
                         $('#item2').html(item2);
+                        $('#item2link').attr('href', item2link);
                         $('#rawResponse').html(prettyResponse);
                         $('#weatherImg').attr('src', weatherImgUrl);
                     }
