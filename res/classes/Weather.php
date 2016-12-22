@@ -45,6 +45,8 @@ class Weather {
             'Cardiff' => '2653822',
             'Aberystywth' => '2657782',
             'Greater London' => '2643743',
+            'Bridgend' => '2654755',
+            'Swansea' => '2636432',
         );
     }
 }

@@ -105,8 +105,9 @@
                         var item1link = responseObj.channel.item[1].link;
                         var item2 = responseObj.channel.item[2].description;
                         var item2link = responseObj.channel.item[2].link;
-                        var prettyResponse = JSON.stringify(responseObj, null, 4);
+                        var prettyResponse = JSON.stringify(responseObj.channel, null, 4);
                         var weatherImgUrl = responseObj.channel.image.url;
+
                         $('#item0').html(item0);
                         $('#item0link').attr('href', item0link);
                         $('#item1').html(item1);
